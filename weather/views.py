@@ -9,7 +9,7 @@ import requests
 
 def index(request):
     # the query(q) is the name of city
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=d8f310c4694db72dd9df4accd477b9bd'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}'
     city = request.GET.get( 'q' )
     if city is None:
         city = 'Gorgan'
