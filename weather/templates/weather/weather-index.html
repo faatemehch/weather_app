@@ -1,3 +1,4 @@
+{% load mathfilters %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,10 +26,8 @@
 
 <body>
 <h3 class="text-center bg-danger text-light mt-5 p-5 mb-5 shadow">How Is The Weather?</h3>
-<div class="text-center bg-light p-2 m-2">
-    <a href="#">
-        ° C
-    </a>
+<div class="text-center bg-light p-2 mt-2 mb-3">
+    <a href="#" id="temperature-unit">° C</a>
 </div>
 <div class="col-5 offset-4">
     <form method="get" action="{% url 'weather' %}">
@@ -38,17 +37,36 @@
         </div>
     </form>
 </div>
-<div class="col-5 offset-4 mt-4 p-2 text-center" id="weather-list">
+<div class="col-5 offset-4 mt-5 p-2 text-center" id="weather-list">
     <div class="bg-light p-2 shadow m-2">
         {% if error %}
             <h6 class="text-danger">{{ error }}</h6>
         {% else %}
             <h6>{{ country }}, {{ city|title }} <img src="http://openweathermap.org/img/w/{{ icon }}.png"
                                                      alt="{{ city }} - {{ country }}"></h6>
-            <p>{{ description }} | {{ temperature|floatformat:1 }}° F</p>
+            <p id="show-temperature">{{ description }} | {{ temperature|floatformat:1 }}° F</p>
         {% endif %}
     </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
 
+    $("#temperature-unit").click(function (e) {
+        e.preventDefault()
+        var a = document.getElementById('temperature-unit').innerHTML
+        if (a === '° C') {
+            $("#temperature-unit").html('° F');
+            {#document.getElementById('temperature-unit').innerHTML = '° F';#}
+            document.getElementById('show-temperature').innerHTML = '{{ description }} | {{ temperature }} ° C';
+
+        } else {
+            $("#temperature-unit").html('° C');
+            {#document.getElementById('temperature-unit').innerHTML = '° C';#}
+            document.getElementById('show-temperature').innerHTML = '{{ description }} | {{ temperature }} ° F';
+        }
+
+    });
+
+</script>
 </html>
