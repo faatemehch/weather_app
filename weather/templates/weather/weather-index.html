@@ -58,12 +58,12 @@
         if (a === '° C') {
             $("#temperature-unit").html('° F');
             {#document.getElementById('temperature-unit').innerHTML = '° F';#}
-            document.getElementById('show-temperature').innerHTML = '{{ description }} | {{ temperature }} ° C';
+            document.getElementById('show-temperature').innerHTML = '{{ description }} | {{ temperature|sub:32|mul:5|div:9|floatformat:1 }} ° C';
 
         } else {
             $("#temperature-unit").html('° C');
             {#document.getElementById('temperature-unit').innerHTML = '° C';#}
-            document.getElementById('show-temperature').innerHTML = '{{ description }} | {{ temperature }} ° F';
+            document.getElementById('show-temperature').innerHTML = '{{ description }} | {{ temperature|floatformat:1 }} ° F';
         }
 
     });

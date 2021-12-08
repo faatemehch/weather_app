@@ -31,8 +31,8 @@ def index(request):
             'temperature': response['main']['temp'],
             'icon': response['weather'][0]['icon']
         }
-        if temperature == 'C':
-            context['temperature'] = convert_to_celsius( context['temperature'] )
+        print( convert_to_celsius( context['temperature'] ) )
+
     except:
         # print( response.get( 'code' ) )
         context = {
